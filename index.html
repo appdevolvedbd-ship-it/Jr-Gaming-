@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b18">
+<meta name="description" content="JR GAMING - Play fun browser games on your phone or computer.">
+<title>JR GAMING | Play • Explore • Enjoy</title>
+<style>
+:root{--bg:#080b18;--panel:#141c32;--line:#293958;--cyan:#00eaff;--purple:#7845ed;--muted:#aebbd4}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:#fff;font-family:Arial,sans-serif}
+header{position:sticky;top:0;z-index:5;background:#11172bf2;padding:16px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.logo{font-size:24px;font-weight:800;color:var(--cyan);letter-spacing:1px}.logo span{color:#b78aff}
+nav{display:flex;gap:16px;flex-wrap:wrap}nav a{color:#fff;text-decoration:none;font-size:14px}
+.hero{text-align:center;padding:54px 16px 42px;background:radial-gradient(ellipse at top,#402078 0%,#17234b 48%,#080b18 100%)}
+.hero h1{font-size:clamp(30px,7vw,52px);margin:0 0 12px}.hero p{color:#d4d9eb;margin:0 0 22px}
+.search{width:min(92%,460px);padding:14px 18px;border:1px solid #53648e;border-radius:30px;background:#0c1225;color:#fff;font-size:16px;outline:none}
+.categories{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;padding:20px 12px}
+.categories button,.action{border:1px solid #46577f;background:#18213b;color:#fff;padding:10px 16px;border-radius:22px;cursor:pointer}
+.categories button.active,.categories button:hover,.action{background:var(--purple);border-color:var(--purple)}
+.section-title{padding:12px 5%;color:var(--cyan);font-size:21px}
+.games{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:0 14px 24px;max-width:1100px;margin:auto}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.cover{height:118px;display:grid;place-items:center;font-size:56px;background:linear-gradient(135deg,#252d58,#522477)}
+.info{padding:13px}.info h3{margin:0 0 7px;font-size:17px}.info p{margin:0 0 12px;color:var(--muted);font-size:13px}
+.play{width:100%;padding:11px;border:0;border-radius:8px;background:var(--purple);color:white;font-weight:bold;font-size:14px;cursor:pointer}
+.play:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+#gameArea{display:none;padding:18px 14px 34px;text-align:center;min-height:350px;scroll-margin-top:80px}
+#gameTitle{color:var(--cyan);font-size:23px}
+.gamebox{margin:12px auto;padding:20px;background:var(--panel);border:1px solid var(--line);border-radius:15px;max-width:430px}
+.gamebox button{padding:11px 15px;margin:5px;border:0;border-radius:8px;background:var(--purple);color:white;cursor:pointer;font-size:16px}
+.gamebox input{max-width:100%;font-size:16px}
+#board{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;max-width:270px;margin:18px auto}
+#board .cell{height:76px;background:#263354;border-radius:10px;font-size:30px}
+#memoryBoard{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:18px}
+#memoryBoard button{height:62px;font-size:25px;padding:5px}
+.back{margin:8px auto 0;background:#273654!important}
+footer{text-align:center;padding:25px;color:#9ba8c5;border-top:1px solid var(--line);font-size:14px}
+.hidden{display:none!important}
+@media(min-width:650px){.games{grid-template-columns:repeat(4,minmax(0,1fr));padding-left:5%;padding-right:5%}.cover{height:145px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">JR <span>GAMING</span></div>
+  <nav aria-label="Main navigation">
+    <a href="#home">Home</a><a href="#games">Games</a><a href="#about">About</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <h1>WELCOME TO JR GAMING</h1>
+  <p>Play Your Favorite Games Anytime!</p>
+  <input class="search" id="search" type="search" placeholder="Search your favorite game..." aria-label="Search games">
+</section>
+
+<div class="categories" aria-label="Game categories">
+  <button class="active" data-category="All">All</button>
+  <button data-category="Puzzle">Puzzle</button>
+  <button data-category="Arcade">Arcade</button>
+  <button data-category="Brain">Brain</button>
+</div>
+
+<h2 class="section-title" id="games">🔥 POPULAR GAMES</h2>
+<section class="games" id="gameList" aria-label="Available games">
+  <article class="card" data-name="Tic Tac Toe" data-cat="Brain">
+    <div class="cover">⭕</div><div class="info"><h3>Tic Tac Toe</h3><p>Two-player brain challenge</p><button class="play" data-game="tic">PLAY NOW</button></div>
+  </article>
+  <article class="card" data-name="Number Guess" data-cat="Puzzle">
+    <div class="cover">🔢</div><div class="info"><h3>Number Guess</h3><p>Guess the hidden number</p><button class="play" data-game="guess">PLAY NOW</button></div>
+  </article>
+  <article class="card" data-name="Memory Game" data-cat="Brain">
+    <div class="cover">🧠</div><div class="info"><h3>Memory Game</h3><p>Find all matching pairs</p><button class="play" data-game="memory">PLAY NOW</button></div>
+  </article>
+  <article class="card" data-name="Click Challenge" data-cat="Arcade">
+    <div class="cover">⚡</div><div class="info"><h3>Click Challenge</h3><p>Tap as fast as you can</p><button class="play" data-game="click">PLAY NOW</button></div>
+  </article>
+</section>
+
+<section id="gameArea" aria-live="polite">
+  <h2 id="gameTitle">Game</h2>
+  <div class="gamebox" id="gameContent"></div>
+  <button class="action back" id="backButton">⬅ BACK TO GAMES</button>
+</section>
+</main>
+
+<footer id="about"><h3>JR GAMING</h3><p>Play • Explore • Enjoy</p><p>© <span id="year"></span> JR GAMING. All Rights Reserved.</p></footer>
+
+<script>
+"use strict";
+const gameList=document.getElementById("gameList");
+const gameArea=document.getElementById("gameArea");
+const gameContent=document.getElementById("gameContent");
+const gameTitle=document.getElementById("gameTitle");
+let currentGame="",board=[],turn="X",secretNumber=0,attempts=0,clickScore=0;
+let timerId=null,firstCard=null,locked=false,matches=0,clickSeconds=10;
+
+document.getElementById("year").textContent=new Date().getFullYear();
+
+document.querySelectorAll(".categories button").forEach(button=>{
+  button.addEventListener("click",()=>{
+    document.querySelectorAll(".categories button").forEach(b=>b.classList.remove("active"));
+    button.classList.add("active");
+    filterGames(button.dataset.category,document.getElementById("search").value);
+  });
+});
+document.getElementById("search").addEventListener("input",()=>{
+  const active=document.querySelector(".categories button.active");
+  filterGames(active?active.dataset.category:"All",document.getElementById("search").value);
+});
+function filterGames(category,query){
+  document.querySelectorAll(".card").forEach(card=>{
+    const categoryMatch=category==="All"||card.dataset.cat===category;
+    const textMatch=card.dataset.name.toLowerCase().includes(query.toLowerCase());
+    card.classList.toggle("hidden",!(categoryMatch&&textMatch));
+  });
+}
+document.querySelectorAll("[data-game]").forEach(button=>{
+  button.addEventListener("click",()=>startGame(button.dataset.game));
+});
+document.getElementById("backButton").addEventListener("click",closeGame);
+
+function startGame(game){
+  clearInterval(timerId);timerId=null;currentGame=game;
+  gameArea.style.display="block";gameList.style.display="none";
+  document.getElementById("games").style.display="none";
+  gameArea.scrollIntoView({behavior:"smooth",block:"start"});
+  if(game==="tic")ticGame();
+  if(game==="guess")guessGame();
+  if(game==="memory")memoryGame();
+  if(game==="click")clickGame();
+}
+function closeGame(){
+  clearInterval(timerId);timerId=null;currentGame="";
+  gameArea.style.display="none";gameList.style.display="grid";
+  document.getElementById("games").style.display="block";
+  gameContent.innerHTML="";
+  document.getElementById("home").scrollIntoView({behavior:"smooth"});
+}
+
+// Tic Tac Toe
+function ticGame(){
+  gameTitle.textContent="⭕ TIC TAC TOE";board=Array(9).fill("");turn="X";
+  gameContent.innerHTML='<h3 id="ticStatus">Player X Turn</h3><div id="board"></div><button id="ticRestart">RESTART</button>';
+  const grid=document.getElementById("board");
+  board.forEach((_,i)=>{
+    const button=document.createElement("button");button.className="cell";button.setAttribute("aria-label","Cell "+(i+1));
+    button.addEventListener("click",()=>makeMove(i,button));grid.appendChild(button);
+  });
+  document.getElementById("ticRestart").addEventListener("click",ticGame);
+}
+function makeMove(index,button){
+  if(currentGame!=="tic"||board[index])return;
+  board[index]=turn;button.textContent=turn;button.disabled=true;
+  const wins=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  const status=document.getElementById("ticStatus");
+  if(wins.some(line=>line.every(i=>board[i]===turn))){
+    status.textContent="🎉 Player "+turn+" wins!";currentGame="finished";return;
+  }
+  if(board.every(Boolean)){status.textContent="It's a draw!";currentGame="finished";return;}
+  turn=turn==="X"?"O":"X";status.textContent="Player "+turn+" Turn";
+}
+
+// Number Guess
+function guessGame(){
+  gameTitle.textContent="🔢 NUMBER GUESS";secretNumber=Math.floor(Math.random()*100)+1;attempts=0;
+  gameContent.innerHTML='<h3>Guess a number between 1 and 100</h3><br><input id="guessInput" type="number" min="1" max="100" inputmode="numeric" placeholder="Your guess" style="padding:12px;width:85%;border-radius:8px"><br><button id="guessCheck">CHECK</button><p id="guessResult">You have 7 attempts!</p><p id="guessAttempts">Attempts: 0 / 7</p><button id="guessRestart">NEW GAME</button>';
+  document.getElementById("guessCheck").addEventListener("click",checkGuess);
+  document.getElementById("guessRestart").addEventListener("click",guessGame);
+}
+function checkGuess(){
+  if(currentGame!=="guess")return;
+  const input=document.getElementById("guessInput"),n=Number(input.value),result=document.getElementById("guessResult");
+  if(input.value.trim()===""||!Number.isInteger(n)||n<1||n>100){result.textContent="Enter a whole number from 1 to 100.";return;}
+  attempts++;document.getElementById("guessAttempts").textContent="Attempts: "+attempts+" / 7";
+  if(n===secretNumber){result.textContent="🎉 Correct! You won!";currentGame="finished";}
+  else if(attempts>=7){result.textContent="Game over! The number was "+secretNumber+".";currentGame="finished";}
+  else result.textContent=n<secretNumber?"Too low! Try higher ⬆️":"Too high! Try lower ⬇️";
+  input.value="";
+}
+
+// Memory Match
+function memoryGame(){
+  gameTitle.textContent="🧠 MEMORY GAME";firstCard=null;locked=false;matches=0;
+  const emojis=["🍎","🍌","🍇","🍒","🍕","🚗"];
+  const cards=[...emojis,...emojis].sort(()=>Math.random()-.5);
+  gameContent.innerHTML='<h3>Find all matching pairs!</h3><div id="memoryBoard"></div><p id="memoryStatus">Matched: 0 / 6</p><button id="memoryRestart">RESTART</button>';
+  const grid=document.getElementById("memoryBoard");
+  cards.forEach(emoji=>{
+    const button=document.createElement("button");button.textContent="❔";button.dataset.emoji=emoji;
+    button.addEventListener("click",()=>flipCard(button));grid.appendChild(button);
+  });
+  document.getElementById("memoryRestart").addEventListener("click",memoryGame);
+}
+function flipCard(card){
+  if(locked||card===firstCard||card.dataset.done||currentGame!=="memory")return;
+  card.textContent=card.dataset.emoji;
+  if(!firstCard){firstCard=card;return;}
+  if(firstCard.dataset.emoji===card.dataset.emoji){
+    firstCard.dataset.done="1";card.dataset.done="1";firstCard.disabled=true;card.disabled=true;firstCard=null;matches++;
+    document.getElementById("memoryStatus").textContent=matches===6?"🎉 YOU WIN!":"Matched: "+matches+" / 6";
+  }else{
+    locked=true;const previous=firstCard;firstCard=null;
+    setTimeout(()=>{previous.textContent="❔";card.textContent="❔";locked=false;},700);
+  }
+}
+
+// Click Challenge
+function clickGame(){
+  gameTitle.textContent="⚡ CLICK CHALLENGE";clickScore=0;
+  gameContent.innerHTML='<h3>Tap as fast as you can in 10 seconds!</h3><h2 id="clickScore">Score: 0</h2><h3 id="clickClock">Time: 10</h3><button id="tapButton" disabled style="font-size:25px;padding:24px">TAP! ⚡</button><p id="clickResult">Press START to begin.</p><button id="clickStart">START</button>';
+  document.getElementById("tapButton").addEventListener("click",()=>{
+    if(currentGame!=="click"||clickSeconds<=0)return;
+    clickScore++;document.getElementById("clickScore").textContent="Score: "+clickScore;
+  });
+  document.getElementById("clickStart").addEventListener("click",startClick);
+}
+function startClick(){
+  clearInterval(timerId);currentGame="click";clickScore=0;clickSeconds=10;
+  const tap=document.getElementById("tapButton");tap.disabled=false;
+  document.getElementById("clickScore").textContent="Score: 0";
+  document.getElementById("clickClock").textContent="Time: 10";
+  document.getElementById("clickResult").textContent="GO!";
+  timerId=setInterval(()=>{
+    clickSeconds--;document.getElementById("clickClock").textContent="Time: "+clickSeconds;
+    if(clickSeconds<=0){
+      clearInterval(timerId);timerId=null;tap.disabled=true;currentGame="finished";
+      document.getElementById("clickResult").textContent="🎉 Time's up! Your score: "+clickScore;
+    }
+  },1000);
+}
+</script>
+</body>
+</html>
